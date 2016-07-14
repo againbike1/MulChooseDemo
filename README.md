@@ -1,0 +1,10 @@
+# MulChooseDemo
+文件说明：
+(1)文件TableMulChoose
+MulChooseTable是TableView多选；
+SingleChooseTable是TableView单选；
+单选和多选共用TableChooseCell,可以根据实际情况自定义。
+(2)文件CollectMulChoose
+MulChooseCollectView是CollectionView多选；
+SingleChooseCollectView是CollectionView单选，如果需要添加Header和Footer可以自己添加；
+单选和多选共用CollectviewChooseCell，可根据实际情况自定义。
