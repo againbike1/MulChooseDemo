@@ -19,6 +19,7 @@
 
 @implementation TableVC_SingleChoose
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
 }
 

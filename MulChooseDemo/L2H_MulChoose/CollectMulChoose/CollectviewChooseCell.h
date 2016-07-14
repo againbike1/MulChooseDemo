@@ -5,8 +5,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CollectviewChooseCell : UICollectionViewCell
-//-(void)setData:(CommonItem *)titleItem selected:(BOOL)Selected;
-//-(void)setData:(CommonItem *)titleItem index:(NSIndexPath *)indexPath;
 @property(nonatomic,retain)UILabel * titleLab;
 @property(nonatomic,retain)UIButton * SelectIconBtn;
 @property (nonatomic,assign)BOOL isSelected;

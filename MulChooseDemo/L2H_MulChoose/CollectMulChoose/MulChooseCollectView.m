@@ -39,7 +39,7 @@ static NSString *HeaderId = @"HeaderId";
     _choosedArr = [[NSMutableArray alloc]initWithCapacity:0];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 0;//列距
-    flowLayout.minimumLineSpacing = 10;
+    flowLayout.minimumLineSpacing = 0;
     _MyCollectView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0 ,SCREEN_WIDTH, self.frame.size.height) collectionViewLayout:flowLayout];
     _MyCollectView.backgroundColor = ColorRGB(0xf7f7f7);
     [_MyCollectView registerClass:[CollectviewChooseCell class] forCellWithReuseIdentifier:CellId];
@@ -72,36 +72,38 @@ static NSString *HeaderId = @"HeaderId";
 #pragma mark --CollectionViewDelegate
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    reusableview = nil;
     if (kind == UICollectionElementKindSectionHeader) {
-        reusableview = [collectionView  dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderId forIndexPath:indexPath];
-        reusableview.backgroundColor = [UIColor whiteColor];
-        UILabel * HeaderTitleLab = [[UILabel alloc]init];
-        HeaderTitleLab.text = @"全选";
-        [reusableview addSubview:HeaderTitleLab];
-        [HeaderTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(reusableview.mas_left).offset(15);
-            make.top.equalTo(reusableview.mas_top).offset(0);
-            make.height.mas_equalTo(reusableview.mas_height);
-        }];
-        UIButton *chooseIcon = [UIButton buttonWithType:UIButtonTypeCustom];
-        chooseIcon.tag = 10;
-        [chooseIcon setImage:[UIImage imageNamed:@"table_UnSelect"] forState:UIControlStateNormal];
-        [chooseIcon setImage:[UIImage imageNamed:@"table_Selected"] forState:UIControlStateSelected];
-        chooseIcon.userInteractionEnabled = NO;
-        [reusableview addSubview:chooseIcon];
-        [chooseIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(HeaderTitleLab.mas_right).offset(10);
-            make.right.equalTo(reusableview.mas_right).offset(-15);
-            make.top.equalTo(reusableview.mas_top);
-            make.height.mas_equalTo(reusableview.mas_height);
-            make.width.mas_equalTo(50);
-        }];
-        
-        UIButton * chooseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        chooseBtn.frame = CGRectMake(0, 0, reusableview.frame.size.width, reusableview.frame.size.height);
-        [chooseBtn addTarget:self action:@selector(ChooseAllClick:) forControlEvents:UIControlEventTouchUpInside];
-        [reusableview addSubview:chooseBtn];
+        if (reusableview==nil) {
+            reusableview = [collectionView  dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderId forIndexPath:indexPath];
+            reusableview.backgroundColor = [UIColor whiteColor];
+            UILabel * HeaderTitleLab = [[UILabel alloc]init];
+            HeaderTitleLab.text = @"全选";
+            [reusableview addSubview:HeaderTitleLab];
+            [HeaderTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(reusableview.mas_left).offset(15);
+                make.top.equalTo(reusableview.mas_top).offset(0);
+                make.height.mas_equalTo(reusableview.mas_height);
+            }];
+            UIButton *chooseIcon = [UIButton buttonWithType:UIButtonTypeCustom];
+            chooseIcon.tag = 10;
+            [chooseIcon setImage:[UIImage imageNamed:@"table_UnSelect"] forState:UIControlStateNormal];
+            [chooseIcon setImage:[UIImage imageNamed:@"table_Selected"] forState:UIControlStateSelected];
+            chooseIcon.userInteractionEnabled = NO;
+            [reusableview addSubview:chooseIcon];
+            [chooseIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(HeaderTitleLab.mas_right).offset(10);
+                make.right.equalTo(reusableview.mas_right).offset(-15);
+                make.top.equalTo(reusableview.mas_top);
+                make.height.mas_equalTo(reusableview.mas_height);
+                make.width.mas_equalTo(50);
+            }];
+            
+            UIButton * chooseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            chooseBtn.frame = CGRectMake(0, 0, reusableview.frame.size.width, reusableview.frame.size.height);
+            [chooseBtn addTarget:self action:@selector(ChooseAllClick:) forControlEvents:UIControlEventTouchUpInside];
+            [reusableview addSubview:chooseBtn];
+
+        }
     }
     return reusableview;
 }
